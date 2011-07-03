@@ -1,0 +1,90 @@
+/* FONTS */
+
+
+
+/* GENERAL INTERFACE */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-size: 62.5%;
+	font-family: "Trebuchet MS", "Helvetica", "Arial", sans-serif;
+	color: #333;
+	background: url(../_img/bg.jpg) fixed;
+	margin: 50px 75px 50px 450px;
+}
+
+a {
+	outline: none;
+	color: #333;
+}
+a:hover {
+	color: #666;
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	border: 0;
+	max-width: 100%;
+}
+
+ul {
+	list-style: none;
+}
+
+select, input {
+	font-size: 1.2em;
+	font-family: "Trebuchet MS", "Helvetica", "Arial", sans-serif;
+	outline: none;
+}
+
+aside {
+	width: 300px;
+	position: fixed;
+	top: 50px;
+	left: 75px;
+}
+
+#logo {
+	max-width: 300px;
+	margin-bottom: 30px;
+}
+
+aside div p {
+	font-size: 1.4em;
+	line-height: 1.4em;
+	margin-bottom: 15px;
+}
+aside div p.note {
+	font-size: 1.1em;
+}
+
+table {
+	width: 100%;
+}
+
+tr.even td {
+	background: #E6E6E6;
+}
+
+td {
+	padding: 5px 0;
+	font-size: 1.4em;
+}
+
+td.pos {
+	padding-right: 20px;
+	width: 34px;
+	text-align: right;
+}
+td.score {
+	padding-right: 10px;
+	text-align: right;
+}
+td.klout {
+	width: 31px;
+}
