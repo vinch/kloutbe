@@ -59,9 +59,22 @@ while ($user = mysql_fetch_assoc($query)) {
 
 	<div id="logo"><img src="_img/klout_be.png" alt="Belgians on Klout"></div>
 	
-	<div>
+	<div id="description">
 		<p>Ranking of Belgian influencers on <a href="http://www.klout.com" target="_blank">Klout</a>. Inspired by <a href="http://datanews.rnews.be/fr/ict/actualite/blog/qui-devez-vous-suivre-dans-la-twittosphere-belge/article-1195010830793.htm" target="_blank">Data News</a> and based on <a href="https://twitter.com/Marievh/belgessurtwitter" target="_blank">this Twitter list</a>. Updated very frequently.</p>
 		<p class="note">Made with &hearts; by <a href="http://twitter.com/vinch01" target="_blank">Vincent Battaglia</a> during Wimbledon 2011 men's final. This experiment is <a href="http://github.com/vinch/kloutbe" target="_blank">forkable on GitHub</a>.</p>
+	</div>
+	
+	<div id="share">
+		<div class="share">
+			<iframe src="http://www.facebook.com/plugins/like.php?app_id=158701270868874&amp;href=http%3A%2F%2Fv1n.ch%2Fklout.be%2F&amp;send=false&amp;layout=box_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:49px; height:60px;" allowTransparency="true"></iframe>
+		</div>
+		<div class="share">
+			<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://v1n.ch/klout.be/" data-count="vertical" data-via="vinch01">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		</div>
+		<div class="share">
+			<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+			<g:plusone size="tall" href="http://v1n.ch/klout.be/"></g:plusone>
+		</div>
 	</div>
 
 </aside>

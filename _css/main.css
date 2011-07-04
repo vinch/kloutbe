@@ -54,6 +54,10 @@ aside {
 	margin-bottom: 30px;
 }
 
+#description {
+	margin-bottom: 30px;
+}
+
 aside div p {
 	font-size: 1.4em;
 	line-height: 1.4em;
@@ -61,6 +65,14 @@ aside div p {
 }
 aside div p.note {
 	font-size: 1.1em;
+}
+
+#share {
+	overflow: hidden;
+}
+.share {
+	float: left;
+	padding-right: 20px;
 }
 
 table {
