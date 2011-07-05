@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+
+$token = md5(time());
+$_SESSION['token'] = $token;
+
 include_once 'db.inc.php';
 
 $query = mysql_query("SELECT * FROM users ORDER BY kscore DESC, twitter_screen_name");
@@ -62,6 +67,15 @@ while ($user = mysql_fetch_assoc($query)) {
 	<div id="description">
 		<p>Ranking of Belgian influencers on <a href="http://www.klout.com" target="_blank">Klout</a>. Inspired by <a href="http://datanews.rnews.be/fr/ict/actualite/blog/qui-devez-vous-suivre-dans-la-twittosphere-belge/article-1195010830793.htm" target="_blank">Data News</a> and based on <a href="https://twitter.com/Marievh/belgessurtwitter" target="_blank">this Twitter list</a>. Updated very frequently.</p>
 		<p class="note">Made with &hearts; by <a href="http://twitter.com/vinch01" target="_blank">Vincent Battaglia</a> during Wimbledon 2011 men's final. This experiment is <a href="http://github.com/vinch/kloutbe" target="_blank">forkable on GitHub</a>.</p>
+	</div>
+	
+	<div id="add">
+		<form method="post" action="submit.php">
+			<div>
+				<input type="text" name="twitter_screen_name" value="Add yourself here..." />
+				<input type="hidden" name="token" value="<?php echo $token ?>" />
+				<button>Submit</button>
+			</div>
 	</div>
 	
 	<div id="share">
