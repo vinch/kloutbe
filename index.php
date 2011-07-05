@@ -37,6 +37,7 @@ while ($user = mysql_fetch_assoc($query)) {
 	<title>Belgians on Klout</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<meta name="description" content="Ranking of Belgian influencers on Klout">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" media="screen" href="_css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen and (max-width: 900px)" href="_css/900.css" />
 	<link rel="stylesheet" type="text/css" media="screen and (max-width: 650px)" href="_css/650.css" />
