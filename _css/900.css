@@ -5,3 +5,12 @@ aside {
 	left: 50px;
 	width: 200px;
 }
+#add {
+	width: 200px;
+}
+#add input { 
+	width: 113px;
+}
+#add input.loading {
+	background-position: 98px 4px;
+}

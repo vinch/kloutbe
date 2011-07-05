@@ -40,6 +40,8 @@ while ($user = mysql_fetch_assoc($query)) {
 	<link rel="stylesheet" type="text/css" media="screen" href="_css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen and (max-width: 900px)" href="_css/900.css" />
 	<link rel="stylesheet" type="text/css" media="screen and (max-width: 650px)" href="_css/650.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type="text/javascript" src="_js/main.js"></script>
 	<script type="text/javascript">
 
 	  var _gaq = _gaq || [];
@@ -66,16 +68,15 @@ while ($user = mysql_fetch_assoc($query)) {
 	
 	<div id="description">
 		<p>Ranking of Belgian influencers on <a href="http://www.klout.com" target="_blank">Klout</a>. Inspired by <a href="http://datanews.rnews.be/fr/ict/actualite/blog/qui-devez-vous-suivre-dans-la-twittosphere-belge/article-1195010830793.htm" target="_blank">Data News</a> and based on <a href="https://twitter.com/Marievh/belgessurtwitter" target="_blank">this Twitter list</a>. Updated very frequently.</p>
+		<div id="add">
+			<form method="post" action="submit.php">
+				<div>
+					<input type="text" name="twitter_screen_name" value="" id="input_twitter_screen_name" />
+					<input type="hidden" name="token" value="<?php echo $token ?>" id="input_token" />
+					<button>Submit</button>
+				</div>
+		</div>
 		<p class="note">Made with &hearts; by <a href="http://twitter.com/vinch01" target="_blank">Vincent Battaglia</a> during Wimbledon 2011 men's final. This experiment is <a href="http://github.com/vinch/kloutbe" target="_blank">forkable on GitHub</a>.</p>
-	</div>
-	
-	<div id="add">
-		<form method="post" action="submit.php">
-			<div>
-				<input type="text" name="twitter_screen_name" value="Add yourself here..." />
-				<input type="hidden" name="token" value="<?php echo $token ?>" />
-				<button>Submit</button>
-			</div>
 	</div>
 	
 	<div id="share">

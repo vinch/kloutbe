@@ -1,9 +1,8 @@
 <?php
 
-$key = 'your_klout_key'; // Get one here --> http://developer.klout.com/member/register
-
 date_default_timezone_set(timezone_name_from_abbr('CET'));
 
+include_once 'config.inc.php';
 include_once 'db.inc.php';
 
 $query = mysql_query("SELECT twitter_screen_name FROM users ORDER BY RAND() LIMIT 0, 50"); // only 50 at a time
@@ -18,7 +17,7 @@ while ($user = mysql_fetch_assoc($query)) {
 $users_chunked = array_chunk($users, 5);
 
 foreach ($users_chunked as $chunk) {
-	$result = json_decode(file_get_contents('http://api.klout.com/1/klout.json?key='.$key.'&users='.implode(',', $chunk)), true);
+	$result = json_decode(file_get_contents($api_endpoint.'?key='.$key.'&users='.implode(',', $chunk)), true);
 	foreach ($result['users'] as $item) {
 		$results[] = $item;
 	}	
