@@ -8,8 +8,10 @@ Files
 
 These are the most important files of this experiment:
 
+* config.inc.php -- Informations relative to Klout API
 * db.inc.php -- Databases informations
 * dump.sql -- Dump of database in SQL format
 * import.php -- useful for first import of list.txt file (after that, it becomes useless)
 * index.php -- The frontend, responsive ;-)
-* refresh.php -- Script that refreshes the ranking. You have to apply a CRON on that file (every hour should be OK).
+* refresh.php -- Script that refreshes the ranking. You have to apply a CRON on that file (every hour should be OK)
+* submit.php -- Script to add new people to the ranking
