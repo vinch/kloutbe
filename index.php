@@ -9,6 +9,8 @@ include_once 'db.inc.php';
 
 $query = mysql_query("SELECT * FROM users ORDER BY kscore DESC, twitter_screen_name");
 
+$nb = mysql_num_rows($query);
+
 $users = array();
 
 $i = 0;
@@ -34,7 +36,7 @@ while ($user = mysql_fetch_assoc($query)) {
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Belgians on Klout</title>
+	<title>Belgians on Klout &mdash; Ranking of the most influential people in Belgium</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<meta name="description" content="Ranking of Belgian influencers on Klout">
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -68,7 +70,7 @@ while ($user = mysql_fetch_assoc($query)) {
 	<div id="logo"><img src="_img/klout_be.png" alt="Belgians on Klout"></div>
 	
 	<div id="description">
-		<p>Ranking of Belgian influencers on <a href="http://www.klout.com" target="_blank">Klout</a>. Inspired by <a href="http://datanews.rnews.be/fr/ict/actualite/blog/qui-devez-vous-suivre-dans-la-twittosphere-belge/article-1195010830793.htm" target="_blank">Data News</a> and based on <a href="https://twitter.com/Marievh/belgessurtwitter" target="_blank">this Twitter list</a>. Updated very frequently.</p>
+		<p>Ranking of Belgian influencers on <a href="http://www.klout.com" target="_blank">Klout</a>. Inspired by <a href="http://datanews.rnews.be/fr/ict/actualite/blog/qui-devez-vous-suivre-dans-la-twittosphere-belge/article-1195010830793.htm" target="_blank">Data News</a> and initially based on <a href="https://twitter.com/Marievh/belgessurtwitter" target="_blank">this Twitter list</a>. <strong><?php echo $nb ?></strong> Belgians ranked so far. Updated very frequently. </p>
 		<div id="add">
 			<form method="post" action="submit.php">
 				<div>
