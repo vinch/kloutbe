@@ -84,7 +84,7 @@ while ($user = mysql_fetch_assoc($query)) {
 	
 	<div id="share">
 		<div class="share">
-			<iframe src="http://www.facebook.com/plugins/like.php?app_id=158701270868874&amp;href=http%3A%2F%2Fv1n.ch%2Fklout.be%2F&amp;send=false&amp;layout=box_count&amp;width=50&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:60px;" allowTransparency="true"></iframe>
+			<iframe src="http://www.facebook.com/plugins/like.php?locale=en_US&amp;app_id=158701270868874&amp;href=http%3A%2F%2Fv1n.ch%2Fklout.be%2F&amp;send=false&amp;layout=box_count&amp;width=50&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:60px;" allowTransparency="true"></iframe>
 		</div>
 		<div class="share">
 			<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://v1n.ch/klout.be/" data-count="vertical" data-via="vinch01">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
