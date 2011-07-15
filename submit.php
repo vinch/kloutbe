@@ -16,43 +16,51 @@ if (isset($_POST['twitter_screen_name']) && isset($_POST['token']) && !empty($_P
 	
 	if (preg_match('/^[A-Za-z0-9_]+$/', $twitter_screen_name)) {
 		
-		if ($token == $_SESSION['token']) {
+		$blacklist = explode("\n", file_get_contents('blacklist.txt'));
+		
+		if (!in_array($twitter_screen_name, $blacklist)) {
+			
+			if ($token == $_SESSION['token']) {
 
-			$ch = curl_init($api_endpoint.'?key='.$key.'&users='.$twitter_screen_name);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			$data = curl_exec($ch);
-			$info = curl_getinfo($ch);
+				$ch = curl_init($api_endpoint.'?key='.$key.'&users='.$twitter_screen_name);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				$data = curl_exec($ch);
+				$info = curl_getinfo($ch);
 
-			if ($info['http_code'] != '404') {
+				if ($info['http_code'] != '404') {
 
-				$query1 = mysql_query("SELECT * FROM users WHERE twitter_screen_name = '$twitter_screen_name'");
+					$query1 = mysql_query("SELECT * FROM users WHERE twitter_screen_name = '$twitter_screen_name'");
 
-				if (mysql_num_rows($query1) == 0) {
-					$data_json = json_decode($data, true);
-					$kscore = $data_json['users'][0]['kscore'];
+					if (mysql_num_rows($query1) == 0) {
+						$data_json = json_decode($data, true);
+						$kscore = $data_json['users'][0]['kscore'];
 
-					$now = date('Y-m-d H:i:s');
+						$now = date('Y-m-d H:i:s');
 
-					$query2 = mysql_query("INSERT INTO users VALUES('', '$twitter_screen_name', '$kscore', '$now')");
+						$query2 = mysql_query("INSERT INTO users VALUES('', '$twitter_screen_name', '$kscore', '$now')");
 
-					if ($query2) {
-						$status = 'ok';
-						$message = $twitter_screen_name.' has been successfully added to the ranking with a Klout score of '.$kscore.'!';
+						if ($query2) {
+							$status = 'ok';
+							$message = $twitter_screen_name.' has been successfully added to the ranking with a Klout score of '.$kscore.'!';
+						}
+						else {
+							$message = 'Error while accessing the database!';
+						}
 					}
 					else {
-						$message = 'Error while accessing the database!';
+						$message = 'This Twitter screen name is already ranked!';
 					}
 				}
 				else {
-					$message = 'This Twitter screen name is already ranked!';
+					$message = 'This Twitter screen name doesn\'t exist!';
 				}
 			}
 			else {
-				$message = 'This Twitter screen name doesn\'t exist!';
+				$message = 'Invalid token!';
 			}
 		}
 		else {
-			$message = 'Invalid token!';
+			$message = 'This Twitter screen name is not allowed!';
 		}
 	}
 	else {
