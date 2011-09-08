@@ -8,3 +8,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `twitter_screen_name` (`twitter_screen_name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+# Add new column to store the change in the score
+ALTER TABLE `users` ADD `kchange` FLOAT AFTER `kscore`;
