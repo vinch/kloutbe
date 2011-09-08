@@ -5,7 +5,7 @@ date_default_timezone_set(timezone_name_from_abbr('CET'));
 include_once 'config.inc.php';
 include_once 'db.inc.php';
 
-$query = mysql_query("SELECT twitter_screen_name FROM users ORDER BY RAND() LIMIT 0, 50"); // only 50 at a time
+$query = mysql_query("SELECT twitter_screen_name FROM users ORDER BY last_update ASC LIMIT 0, 50"); // only 50 at a time
 
 $users = array();
 $results = array();
