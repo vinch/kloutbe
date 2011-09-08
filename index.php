@@ -103,6 +103,7 @@ while ($user = mysql_fetch_assoc($query)) {
 			<td class="pos"><strong><?php echo $user['pos'] ?></strong></td>
 			<td class="name"><a href="http://twitter.com/<?php echo $user['twitter_screen_name'] ?>" target="_blank"><?php echo $user['twitter_screen_name'] ?></a></td>
 			<td class="score"><strong><?php echo number_format($user['kscore'], 2) ?></strong></td>
+			<td class="change"><strong><?php echo (($user['kchange'] < 0) ? '&#9660;' : (($user['kchange'] == 0) ? '-' : '&#9650;')); ?></strong></td>
 			<td class="klout"><a href="http://klout.com/<?php echo $user['twitter_screen_name'] ?>" target="_blank"><img src="_img/icon.png" /></a></td>
 		</tr>
 	<?php endforeach; ?>
