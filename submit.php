@@ -37,7 +37,7 @@ if (isset($_POST['twitter_screen_name']) && isset($_POST['token']) && !empty($_P
 
 						$now = date('Y-m-d H:i:s');
 
-						$query2 = mysql_query("INSERT INTO users VALUES('', '$twitter_screen_name', '$kscore', '$now')");
+						$query2 = mysql_query("INSERT INTO users VALUES('', '$twitter_screen_name', '$kscore', '', '$now')");
 
 						if ($query2) {
 							$status = 'ok';
