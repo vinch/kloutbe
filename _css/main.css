@@ -147,8 +147,11 @@ td.pos {
 	text-align: right;
 }
 td.score {
-	padding-right: 10px;
 	text-align: right;
+}
+td.change {
+	width: 30px;
+	text-align: center;
 }
 td.klout {
 	width: 31px;
