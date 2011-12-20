@@ -40,6 +40,7 @@ https://twitter.com/davanac/rtl-group
 https://twitter.com/davanac/vrt
 https://twitter.com/Eurocentrique/brussels
 https://twitter.com/l_amande/brussels
+https://twitter.com/Marievh/belgessurtwitter
 https://twitter.com/momobxl/bxlcommunity
 https://twitter.com/objectif_web/web-in-be
 https://twitter.com/ogillin/belgian-minds
