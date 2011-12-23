@@ -153,6 +153,9 @@ td.change {
 	width: 30px;
 	text-align: center;
 }
+td.force {
+	width: 26px;
+}
 td.klout {
 	width: 31px;
 }
