@@ -97,6 +97,12 @@ while ($user = mysql_fetch_assoc($query)) {
 
 </aside>
 
+<?php if ($users[0]['kscore'] == -1) : ?>
+
+<p style="font-size:14px;">The ranking is currently down. Please come back later.</p>
+
+<?php else : ?>
+
 <table cellspacing="0" cellpadding="0">
 	<?php foreach ($users as $key => $user) : ?>
 		<tr<?php if ($key%2 == 0) echo ' class="even"' ?>>
@@ -104,7 +110,7 @@ while ($user = mysql_fetch_assoc($query)) {
 			<td class="name"><a href="http://twitter.com/<?php echo $user['twitter_screen_name'] ?>" target="_blank"><?php echo $user['twitter_screen_name'] ?></a></td>
 			<td class="score"><strong><?php echo ($user['kscore'] != -1) ? number_format($user['kscore'], 2) : 'N/A' ?></strong></td>
 			<td class="change"><strong><?php echo (($user['kchange'] < 0) ? '&#9660;' : (($user['kchange'] == 0) ? '-' : '&#9650;')); ?></strong></td>
-			<td class="force"><a href="force.php?u=<?php echo $user['twitter_screen_name'] ?>"><img src="_img/refresh.gif" /></a></td>
+			<!--td class="force"><a href="force.php?u=<?php echo $user['twitter_screen_name'] ?>"><img src="_img/refresh.gif" /></a></td-->
 			<td class="klout"><a href="http://klout.com/<?php echo $user['twitter_screen_name'] ?>" target="_blank"><img src="_img/icon.png" /></a></td>
 		</tr>
 	<?php endforeach; ?>
@@ -115,6 +121,8 @@ while ($user = mysql_fetch_assoc($query)) {
 <script type="text/javascript">
 	alert("Score for <?php echo $_GET['u'] ?> is now <?php echo $_GET['s'] ?>!"); 
 </script>
+
+<?php endif; ?>
 
 <?php endif; ?>
 
