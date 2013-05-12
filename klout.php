@@ -51,7 +51,7 @@ class Klout {
 	 * }
 	 *
 	 * @param string $id The Klout id of the user to fetch the score for
-	 * @return float|false The Klout score, or false on failure
+	 * @return array|false The Klout score & delta
 	 */
 	public static function getScore($id) {
 		global $api_endpoint, $key;
@@ -64,7 +64,7 @@ class Klout {
 		if ($info['http_code'] != '404') {
 
 			$data_json = json_decode($data, true);
-			return $data_json['score'];
+			return $data_json;
 
 		}
 

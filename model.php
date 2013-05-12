@@ -30,6 +30,8 @@ class Model {
 
 				if ($kscore !== false) {
 
+					$kscore = $kscore['score'];
+
 					$query1 = mysql_query("SELECT * FROM users WHERE twitter_screen_name = '$twitter_screen_name'");
 
 					if (mysql_num_rows($query1) == 0) {
@@ -104,9 +106,6 @@ class Model {
 	/**
 	 * Refresh a user's Klout score.
 	 *
-	 * Note: instead of calculating change ourselves, at some point we may want
-	 * to use Klout's scoreDelta data (see the API details for score)
-	 *
 	 * @param array $user
 	 * @return float New score
 	 */
@@ -116,23 +115,13 @@ class Model {
 
 		// Make sure we did retrieve a response score
 		if($score !== false) {
-			// Get the user's previous score
-			$old_score = $user['kscore'];
-
-			// Calculate the change if the score changed
-			if(!empty($old_score) && $score != $old_score) {
-				// Calculate the different between the old and the new score
-				$change = $score - $old_score;
-			}
-			else {
-				// Put the old change back
-				$change = $user['kchange'];
-			}
+			$change = $score['scoreDelta']['weekChange'];
+			$score = $score['score'];
 		}
 		else {
 			// No response = invalid account
-			$score = -1;
 			$change = 0;
+			$score = -1;
 		}
 
 		// Compose the fields that need to be updated
