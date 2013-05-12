@@ -14,7 +14,7 @@ $results = array();
 while ($user = mysql_fetch_assoc($query)) {
 	$usernames[] = $user['twitter_screen_name'];
 	
-	// Array with additonal information which will be used the calculate the change
+	// Array with additional information which will be used the calculate the change
 	$scores[$user['twitter_screen_name']] = array(
 		'score' => $user['kscore'],
 		'change' => $user['kchange']
