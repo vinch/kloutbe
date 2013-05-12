@@ -7,9 +7,10 @@ $_SESSION['token'] = $token;
 
 include_once 'db.inc.php';
 
-$query = mysql_query("SELECT * FROM users ORDER BY kscore DESC, twitter_screen_name");
+$query1 = mysql_query("SELECT * FROM users WHERE kscore != 0 AND kscore != -1 ORDER BY kscore DESC, twitter_screen_name"); // ranked
+$query2 = mysql_query("SELECT * FROM users"); // all
 
-$nb = mysql_num_rows($query);
+$nb = mysql_num_rows($query2);
 
 $users = array();
 
@@ -17,7 +18,7 @@ $i = 0;
 $prev_score = 0;
 $prev_pos = 0;
 
-while ($user = mysql_fetch_assoc($query)) {
+while ($user = mysql_fetch_assoc($query1)) {
 	if ($prev_score == $user['kscore']) {
 		$user['pos'] = $prev_pos;
 	}
@@ -97,7 +98,7 @@ while ($user = mysql_fetch_assoc($query)) {
 
 </aside>
 
-<?php if ($users[0]['kscore'] == -1 || $users[0]['kscore'] == 0) : ?>
+<?php if (count($users) == 0) : ?>
 
 <p style="font-size:14px;">The ranking is currently down. Please come back later.</p>
 
@@ -115,6 +116,8 @@ while ($user = mysql_fetch_assoc($query)) {
 		</tr>
 	<?php endforeach; ?>
 </table>
+
+<p style="font-size:14px;padding-top:20px;">People not having a Klout score are not shown.</p>
 
 <?php if (isset($_GET['u']) && isset($_GET['s'])) : ?>
 	

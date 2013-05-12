@@ -18,7 +18,7 @@ if (isset($_POST['twitter_screen_name']) && isset($_POST['token']) && !empty($_P
 		
 		$blacklist = explode("\n", file_get_contents('blacklist.txt'));
 		
-		if (!in_array($twitter_screen_name, $blacklist)) {
+		if (!in_array(strtolower($twitter_screen_name), $blacklist)) {
 			
 			if ($token == $_SESSION['token']) {
 
