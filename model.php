@@ -26,11 +26,12 @@ class Model {
 
 			if ($klout_id !== false) {
 
-				$kscore = Klout::getScore($klout_id);
+				$score = Klout::getScore($klout_id);
 
-				if ($kscore !== false) {
+				if ($score !== false) {
 
-					$kscore = $kscore['score'];
+					$kscore = $score['score'];
+					$kchange = $score['scoreDelta']['weekChange'];
 
 					$query1 = mysql_query("SELECT * FROM users WHERE twitter_screen_name = '$twitter_screen_name'");
 
@@ -38,7 +39,7 @@ class Model {
 
 						$now = date('Y-m-d H:i:s');
 
-						$query2 = mysql_query("INSERT INTO users VALUES('', '$twitter_screen_name', '$klout_id', '$kscore', '', '$now')");
+						$query2 = mysql_query("INSERT INTO users VALUES('', '$twitter_screen_name', '$klout_id', '$kscore', '$kchange', '$now')");
 
 						if ($query2) {
 							$status = 'ok';
@@ -115,17 +116,17 @@ class Model {
 
 		// Make sure we did retrieve a response score
 		if($score !== false) {
-			$change = $score['scoreDelta']['weekChange'];
-			$score = $score['score'];
+			$kchange = $score['scoreDelta']['weekChange'];
+			$kscore = $score['score'];
 		}
 		else {
 			// No response = invalid account
-			$change = 0;
-			$score = -1;
+			$kchange = 0;
+			$kscore = -1;
 		}
 
 		// Compose the fields that need to be updated
-		$set_sql = sprintf('kscore = \'%f\', kchange=\'%f\', ', $score, $change);
+		$set_sql = sprintf('kscore = \'%f\', kchange=\'%f\', ', $kscore, $kchange);
 
 		// Update the user
 		$now = date('Y-m-d H:i:s');
