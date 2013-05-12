@@ -2,10 +2,7 @@
 
 session_start();
 
-date_default_timezone_set(timezone_name_from_abbr('CET'));
-
-include_once 'config.inc.php';
-include_once 'db.inc.php';
+include_once 'model.php';
 
 $status = 'error';
 
@@ -16,58 +13,13 @@ if (isset($_POST['twitter_screen_name']) && isset($_POST['token']) && !empty($_P
 	
 	if (preg_match('/^[A-Za-z0-9_]+$/', $twitter_screen_name)) {
 		
-		$blacklist = explode("\n", file_get_contents('blacklist.txt'));
-		
-		if (!in_array(strtolower($twitter_screen_name), $blacklist)) {
-			
-			if ($token == $_SESSION['token']) {
+		if ($token == $_SESSION['token']) {
 
-				$ch = curl_init($api_endpoint.'/identity.json/twitter?key='.$key.'&screenName='.$twitter_screen_name);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				$data = curl_exec($ch);
-				$info = curl_getinfo($ch);
-
-				if ($info['http_code'] != '404') {
-
-					$query1 = mysql_query("SELECT * FROM users WHERE twitter_screen_name = '$twitter_screen_name'");
-
-					if (mysql_num_rows($query1) == 0) {
-						$data_json = json_decode($data, true);
-
-                        $result = json_decode(file_get_contents($api_endpoint.'/user.json/'.$data_json['id'].'/score?key=' . $key), true);
-                        if(isset($result['score'])) {
-                            $kscore = $result['score'];
-
-                            $now = date('Y-m-d H:i:s');
-
-                            $query2 = mysql_query("INSERT INTO users (twitter_screen_name, kscore, last_update) VALUES('$twitter_screen_name', '$kscore', '$now')");
-
-                            if ($query2) {
-                                $status = 'ok';
-                                $message = $twitter_screen_name.' has been successfully added to the ranking with a Klout score of '.$kscore.'!';
-                            }
-                            else {
-                                $message = 'Error while accessing the database!';
-                            }
-                        }
-                        else {
-                            $message = 'Error while receiving the score';
-                        }
-					}
-					else {
-						$message = 'This Twitter screen name is already ranked!';
-					}
-				}
-				else {
-					$message = 'This Twitter screen name doesn\'t exist!';
-				}
-			}
-			else {
-				$message = 'Invalid token!';
-			}
+			// fetch this user's Klout data & insert into db
+			list($status, $message) = Model::insert($twitter_screen_name);
 		}
 		else {
-			$message = 'This Twitter screen name is not allowed!';
+			$message = 'Invalid token!';
 		}
 	}
 	else {

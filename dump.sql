@@ -11,3 +11,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 # Add new column to store the change in the score
 ALTER TABLE `users` ADD `kchange` FLOAT AFTER `kscore`;
+
+# Add new column to save the klout id
+ALTER TABLE `users` ADD `kid` varchar(255) AFTER `twitter_screen_name`;
