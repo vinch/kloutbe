@@ -97,7 +97,7 @@ while ($user = mysql_fetch_assoc($query)) {
 
 </aside>
 
-<?php if ($users[0]['kscore'] == -1) : ?>
+<?php if ($users[0]['kscore'] == -1 || $users[0]['kscore'] == 0) : ?>
 
 <p style="font-size:14px;">The ranking is currently down. Please come back later.</p>
 
