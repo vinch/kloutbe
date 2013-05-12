@@ -22,7 +22,7 @@ if (isset($_POST['twitter_screen_name']) && isset($_POST['token']) && !empty($_P
 			
 			if ($token == $_SESSION['token']) {
 
-				$ch = curl_init($api_endpoint.'?key='.$key.'&users='.$twitter_screen_name);
+				$ch = curl_init($api_endpoint.'/identity.json/twitter?key='.$key.'&screenName='.$twitter_screen_name);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				$data = curl_exec($ch);
 				$info = curl_getinfo($ch);
@@ -33,19 +33,26 @@ if (isset($_POST['twitter_screen_name']) && isset($_POST['token']) && !empty($_P
 
 					if (mysql_num_rows($query1) == 0) {
 						$data_json = json_decode($data, true);
-						$kscore = $data_json['users'][0]['kscore'];
 
-						$now = date('Y-m-d H:i:s');
+                        $result = json_decode(file_get_contents($api_endpoint.'/user.json/'.$data_json['id'].'/score?key=' . $key), true);
+                        if(isset($result['score'])) {
+                            $kscore = $result['score'];
 
-						$query2 = mysql_query("INSERT INTO users VALUES('', '$twitter_screen_name', '$kscore', '', '$now')");
+                            $now = date('Y-m-d H:i:s');
 
-						if ($query2) {
-							$status = 'ok';
-							$message = $twitter_screen_name.' has been successfully added to the ranking with a Klout score of '.$kscore.'!';
-						}
-						else {
-							$message = 'Error while accessing the database!';
-						}
+                            $query2 = mysql_query("INSERT INTO users (twitter_screen_name, kscore, last_update) VALUES('$twitter_screen_name', '$kscore', '$now')");
+
+                            if ($query2) {
+                                $status = 'ok';
+                                $message = $twitter_screen_name.' has been successfully added to the ranking with a Klout score of '.$kscore.'!';
+                            }
+                            else {
+                                $message = 'Error while accessing the database!';
+                            }
+                        }
+                        else {
+                            $message = 'Error while receiving the score';
+                        }
 					}
 					else {
 						$message = 'This Twitter screen name is already ranked!';
