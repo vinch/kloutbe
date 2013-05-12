@@ -10,7 +10,7 @@ if (isset($_GET['u']) && !empty($_GET['u'])) {
 	if ($user !== false) {
 		$score = Model::refreshScore($user);
 
-		header('Location: .?u='.$user['twitter_screen_name'].'&s='.$score);
+		header('Location: .?u='.$user['twitter_screen_name'].'&s='.$score['score']);
 	}
 	else {
 		header('Location: .');
