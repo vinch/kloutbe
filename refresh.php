@@ -21,33 +21,29 @@ while ($user = mysql_fetch_assoc($query)) {
 	);
 }
 
-$users_chunked = array_chunk($usernames, 5);
-
-foreach ($users_chunked as $chunk) {	
-	$result = json_decode(file_get_contents($api_endpoint.'?key='.$key.'&users='.urlencode(implode(',', $chunk))), true);
-	
-	foreach ($result['users'] as $item) {
-		$results[$item['twitter_screen_name']] = $item['kscore'];
-	}
-	
-	// Avoid Klout API limitations - max 10/req second
-	sleep(0.5);
-}
-
 $now = date('Y-m-d H:i:s');
 
-// Run trough the users to update them
 foreach ($usernames as $username) {
-	// Check if there is a result for this user
-	if(isset($results[$username])) {
+	$result = json_decode(file_get_contents($api_endpoint.'/identity.json/twitter?key='.$key.'&screenName='.$username), true);
+
+    // Check if there is a result for this user
+    if(isset($result['id'])) {
+        // Get the user Klout id
+        $kid = $result['id'];
+
+        $result = json_decode(file_get_contents($api_endpoint.'/user.json/'.$kid.'/score?key=' . $key), true);
+
+        // Get the Klout query result
+        $score = $result['score'];
+
+        // Avoid Klout API limitations - max 10/req second
+        sleep(0.5);
+
 		// Get the user's previous score
 		$old_score = $scores[$username]['score'];
 		
-		// Get the Klout query result
-		$score = $results[$username];
-		
 		// Calculate the change if the score changed
-		if(!empty($old_score) && $result['kscore'] != $old_score) {
+		if(!empty($old_score) && $score != $old_score) {
 			// Calculate the different between the old and the new score
 			$change = $score - $old_score;
 		}
