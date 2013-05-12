@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once 'model.php';
+include_once 'db.php';
 
 $status = 'error';
 
@@ -16,7 +16,7 @@ if (isset($_POST['twitter_screen_name']) && isset($_POST['token']) && !empty($_P
 		if ($token == $_SESSION['token']) {
 
 			// fetch this user's Klout data & insert into db
-			list($status, $message) = insert($twitter_screen_name);
+			list($status, $message) = DB::insert($twitter_screen_name);
 		}
 		else {
 			$message = 'Invalid token!';
