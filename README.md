@@ -120,7 +120,10 @@ These are the most important files of this experiment:
 * db.inc.php -- Databases informations
 * dump.sql -- Dump of database in SQL format
 * index.php -- The frontend, responsive ;-)
-* refresh.php -- Script that refreshes the ranking. You have to apply a CRON on that file (every hour should be OK)
+* refresh.php -- Script that refreshes the ranking. You have to apply a CRON on that file (every day should be OK)
 * submit.php -- Script to add new people to the ranking
-* import.php -- useful for first import of list.txt file (can also be used to add new usernames to the database)
+* force.php -- Script to force a Klout score update of a single user
+* import.php -- Useful for first import of list.txt file (can also be used to add new usernames to the database)
+* model.php -- Shared DB-related logic
+* klout.php -- Klout API calls
 * list.txt --stores list of usernames to add to the database. to be used for the initial load and/or for updates
